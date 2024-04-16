@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TeacherComment extends Model
 {
     use HasFactory;
+
+    function diary() 
+    {
+        return $this->belongsTo('App\Models\Diary');
+    }
+
 }

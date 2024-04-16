@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class StudentResponse extends Model
 {
     use HasFactory;
+
+    function lesson()
+    {
+        $this->belongsTo('App\Models\Lesson');
+    }
 }

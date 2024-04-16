@@ -26,55 +26,31 @@
     </div>
     <div class="middle_content">
         <table>
+            @foreach ($lessons as $lesson)
             <tr>
-                <th>1</th>
-                <td>国語</td>
-                <td>ごんぎつね</td>
-                <td>〇</td>
-                <td>コメント</td>
+               
+                <th>{{ $lesson->period }}</th>
+                <td>{{ $lesson->subject->name }}</td>
+                <td>{{ $lesson->content }}</td>
+            
+                @if($lesson->studentResponse)
+                    <td>{{ $lesson->studentResponse->understanding }}</td>
+                    <td>{{ $lesson->studentResponse->comment }}</td>
+                @endif
+            
             </tr>
-            <tr>
-                <th>2</th>
-                <td>国語</td>
-                <td>ごんぎつね</td>
-                <td>〇</td>
-                <td>コメント</td>
-            </tr>
-            <tr>
-                <th>3</th>
-                <td>国語</td>
-                <td>ごんぎつね</td>
-                <td>〇</td>
-                <td>コメント</td>
-            </tr>
-            <tr>
-                <th>4</th>
-                <td>国語</td>
-                <td>ごんぎつね</td>
-                <td>〇</td>
-                <td>コメント</td>
-            </tr>
-            <tr>
-                <th>5</th>
-                <td>国語</td>
-                <td>ごんぎつね</td>
-                <td>〇</td>
-                <td>コメント</td>
-            </tr>
-            <tr>
-                <th>6</th>
-                <td>国語</td>
-                <td>ごんぎつね</td>
-                <td>〇</td>
-                <td>コメント</td>
-            </tr>
+            @endforeach
+        
         </table>
     </div>
     <div class="bottom_content">
         <div>日記</div>
-        <div>〇</div>
-        <div><p>aaaaaaaaaaaaa</p></div>
-        <div>コメント</div>
+        @if($diary)
+        <div>{{ $diary->mood }}</div>
+        <div>{{ $diary->diary_content }}</div>
+        @endif
+    
+        <div>{{ $diary->teacherComment->comment }}</div>
     </div>
 </body>
 </html>
