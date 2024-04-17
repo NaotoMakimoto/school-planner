@@ -4,7 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\LessonController;
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\DiaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/lesson', [LessonController::class, 'store'])->name('lesson.store');
+Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');
 
-Route::post('/response', [ResponseController::class, 'store'])->name('response.store');
+Route::put('/lessons/{id}', [LessonController::class, 'update'])->name('lessons.update');
+
+Route::post('/diaries', [DiaryController::class, 'store'])->name('diaries.store');
+
+Route::put('/diaries/{id}', [DiaryController::class, 'update'])->name('diaries.update');
+
+

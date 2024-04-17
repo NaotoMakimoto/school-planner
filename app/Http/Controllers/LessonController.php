@@ -20,4 +20,16 @@ class LessonController extends Controller
 
         return redirect()->route('home');
     }
+
+
+    function update(Request $request, $id)
+    {
+        $lesson = Lesson::find($id);
+
+        $lesson -> understanding = $request -> understanding;
+        $lesson -> comment = $request -> comment;
+        $lesson -> save();
+
+        return redirect()->route('home');
+    }
 }

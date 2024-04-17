@@ -14,10 +14,5 @@ class Lesson extends Model
         return $this->belongsTo('App\Models\Subject');
     }
 
-    function studentResponse()
-    {
-        return $this->hasOne('App\Models\StudentResponse');
-    }
-
     public $timestamps = false;
 }

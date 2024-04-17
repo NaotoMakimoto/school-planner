@@ -8,9 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Diary extends Model
 {
     use HasFactory;
-
-    function teacherComment()
-    {
-        return $this->hasOne('App\Models\teacherComment');
-    }
 }

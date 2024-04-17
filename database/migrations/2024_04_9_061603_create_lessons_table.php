@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('subject_id')->constrained('subjects');
             $table->text('content');
             $table->foreignId('teacher_id')->constrained('users');
-            // $table->timestamps();
+            $table->integer('understanding');
+            $table->text('comment');
+            $table->timestamps();
         });
     }
 
