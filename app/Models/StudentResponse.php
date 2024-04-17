@@ -13,4 +13,5 @@ class StudentResponse extends Model
     {
         $this->belongsTo('App\Models\Lesson');
     }
+
 }
