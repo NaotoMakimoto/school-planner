@@ -21,11 +21,7 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
     public function index()
     {
         $today = Carbon::today(); 
@@ -37,6 +33,5 @@ class HomeController extends Controller
         $diary = Diary::with('teacherComment')
             ->where('date', $today)->first(); 
         return view('home', ['lessons' => $lessons, 'tasks' => $tasks, 'diary' => $diary, 'today' => $today->toDateString()]);
-       
     }
 }
