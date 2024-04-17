@@ -18,4 +18,6 @@ class Lesson extends Model
     {
         return $this->hasOne('App\Models\StudentResponse');
     }
+
+    public $timestamps = false;
 }
