@@ -17,7 +17,7 @@
         <form method="post" action="{{ route('tasks.store') }}">
             @csrf
             <input type="date" name="date" value="{{ $date }}" required>
-            <button type="submit" class="btn btn-primary">日付を選択</button>
+            <button type="submit" class="btn btn-primary">選択</button>
         </form>
         
         <div>
@@ -35,7 +35,7 @@
         </div>
          <!-- タスク追加ボタン -->
          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_task">
-            追加
+            編集
         </button>
         <!-- Modal -->
         <div class="modal fade" id="Modal_task" tabindex="-1" aria-labelledby="ModalLabel_task" aria-hidden="true">
@@ -49,8 +49,8 @@
                     <form action="{{ $task ? route('tasks.update', $task->id): '' }}" method="post">
                     @csrf
                     @method('put')
-                    <textarea name="assignments" cols="30" rows="10"></textarea>
-                    <textarea name="belongings" cols="30" rows="10"></textarea>
+                    <textarea name="assignments" cols="30" rows="10" >{{ $task->assignments ?? '' }}</textarea>
+                    <textarea name="belongings" cols="30" rows="10" >{{ $task->belongings ?? '' }}</textarea>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -85,9 +85,9 @@
                         <td>{{ $lesson->understanding ?? '' }}</td>
                         <td>{{ $lesson->comment ?? '' }}</td>
                         <td>
-                            <!-- Button trigger modal -->
+                            <!-- 生徒の感想ボタン -->
                             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $i }}">
-                                追加
+                                感想
                             </button>
                             
                             <!-- Modal -->
@@ -135,9 +135,9 @@
         </table>
     </div>
 
-<!-- Button trigger modal -->
+<!-- 授業追加ボタン -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    ＋
+    追加
   </button>
   
   <!-- Modal -->
@@ -196,7 +196,7 @@
         @endif
         <!-- 今日の気分と日記を投稿するボタン -->
         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal_diary">
-            ＋
+            日記
         </button>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal_diary" tabindex="-1" aria-labelledby="exampleModalLabel_diary" aria-hidden="true">
@@ -236,7 +236,7 @@
         </div>
         <!-- 先生のコメントボタン -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
-            追加
+            コメント
         </button>
         <!-- Modal -->
         <div class="modal fade" id="Modal_diary_comment" tabindex="-1" aria-labelledby="ModalLabel_diary_comment" aria-hidden="true">
@@ -250,7 +250,7 @@
                     <form action="{{ $diary ? route('diaries.update', $diary->id): '' }}" method="post">
                     @csrf
                     @method('put')
-                    <textarea name="comment" cols="30" rows="10"></textarea>
+                    <textarea name="comment" cols="30" rows="10">{{ $diary->comment ?? '' }}</textarea>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
