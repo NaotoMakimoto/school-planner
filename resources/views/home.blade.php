@@ -12,21 +12,55 @@
 </head>
 <body>
     <div class="top_content">
-        <div>{{ $today }}</div>
+        {{-- <div>{{ $today }}</div> --}}
+
+        <form method="post" action="{{ route('tasks.store') }}">
+            @csrf
+            <input type="date" name="date" value="{{ $date }}" required>
+            <button type="submit" class="btn btn-primary">日付を選択</button>
+        </form>
+        
         <div>
             <div>
-                <h1>宿題</h1>
-                @foreach ($tasks as $task)
-                <p>{{ $task->assignments }}</p>
-                @endforeach
-            </div>
-            <div>
+                <h1>宿題</h1> 
+                @if($task)                  
+                <div>{{ $task->assignments}}</div>
+                @endif
                 <h1>持ち物</h1>
-                @foreach ($tasks as $task)
-                <p>{{ $task->belongings }}</p>
-                @endforeach
+                @if($task)
+                <div>{{ $task->belongings}}</div>
+                @endif
+            </div>
+           
+        </div>
+         <!-- タスク追加ボタン -->
+         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_task">
+            追加
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="Modal_task" tabindex="-1" aria-labelledby="ModalLabel_task" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel_task">宿題・持ち物</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ $task ? route('tasks.update', $task->id): '' }}" method="post">
+                    @csrf
+                    @method('put')
+                    <textarea name="assignments" cols="30" rows="10"></textarea>
+                    <textarea name="belongings" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+            </div>
             </div>
         </div>
+
     </div>
     <div class="middle_content">
         <table>
@@ -65,7 +99,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('lessons.update', $lesson->id) }}" method="post">
+                                            <form action="{{ $lesson ? route('lessons.update', $lesson->id) : '' }}" method="post">
                                                 @csrf
                                                 @method('put')
                                                 <label>
@@ -169,7 +203,7 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel_diary">授業</h5>
+                <h5 class="modal-title" id="exampleModalLabel_diary">日記</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -200,7 +234,7 @@
             </div>
             </div>
         </div>
-        <!-- 先制のコメントボタン -->
+        <!-- 先生のコメントボタン -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
             追加
         </button>
@@ -209,11 +243,11 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel_diary_comment">授業</h5>
+                <h5 class="modal-title" id="ModalLabel_diary_comment">先生のコメント</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('diaries.update', $diary->id) }}" method="post">
+                    <form action="{{ $diary ? route('diaries.update', $diary->id): '' }}" method="post">
                     @csrf
                     @method('put')
                     <textarea name="comment" cols="30" rows="10"></textarea>

@@ -24,12 +24,13 @@ class HomeController extends Controller
     public function index()
     {
         $today = Carbon::today(); 
-        $tasks = Task::whereDate('date', $today)->get();    
+        $date = $today->format('Y-m-d');
+        $task = Task::whereDate('date', $date)->first();    
         $lessons = Lesson::with('subject')
-            ->whereDate('date', $today)
+            ->whereDate('date', $date)
             ->orderBy('period', 'asc') // 'period'を基準に昇順でソート
             ->get();
-        $diary = Diary::where('date', $today)->first(); 
-        return view('home', ['lessons' => $lessons, 'tasks' => $tasks, 'diary' => $diary, 'today' => $today->toDateString()]);
+        $diary = Diary::where('date', $date)->first(); 
+        return view('home', compact('task', 'date', 'today', 'lessons', 'diary'));
     }
 }

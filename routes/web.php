@@ -33,4 +33,7 @@ Route::post('/diaries', [DiaryController::class, 'store'])->name('diaries.store'
 
 Route::put('/diaries/{id}', [DiaryController::class, 'update'])->name('diaries.update');
 
+Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
