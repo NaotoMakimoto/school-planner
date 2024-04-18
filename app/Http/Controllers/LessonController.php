@@ -11,7 +11,8 @@ class LessonController extends Controller
     function store(Request $request)
     {
         $lesson = new Lesson;
-        $lesson -> date = Carbon::today();
+        $selected_date = $request->session()->get('selected_date', Carbon::today()->toDateString());
+        $lesson -> date = $selected_date;
         $lesson -> period = $request -> period;
         $lesson -> subject_id = $request -> subject_id;
         $lesson -> content = $request -> content;

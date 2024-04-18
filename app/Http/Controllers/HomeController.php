@@ -21,10 +21,11 @@ class HomeController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
         $today = Carbon::today(); 
-        $date = $today->format('Y-m-d');
+        $selected_date = $request->session()->get('selected_date', Carbon::today()->toDateString());
+        $date = $selected_date;
         $task = Task::whereDate('date', $date)->first();    
         $lessons = Lesson::with('subject')
             ->whereDate('date', $date)

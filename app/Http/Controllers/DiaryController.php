@@ -11,7 +11,8 @@ class DiaryController extends Controller
     function store(Request $request) 
     {
         $diary = new Diary;
-        $diary -> date = Carbon::today();
+        $selected_date = $request->session()->get('selected_date', Carbon::today()->toDateString());
+        $diary -> date = $selected_date;
         $diary -> mood = $request -> mood;
         $diary -> content = $request -> content;
         $diary -> comment = $request -> comment;

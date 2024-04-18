@@ -12,43 +12,30 @@ class TaskController extends Controller
 {
     function store(Request $request)
     {
-        $today = Carbon::today(); 
-        $date = $request->input('date');
+        $date = $request->input('date', Carbon::today()->toDateString());
+
+        // セッションに選択された日付を保存
+        $request->session()->put('selected_date', $date);
     
         // firstOrCreateメソッドで、データがあれば取得、なければ新しいレコードを作成して保存
         $task = Task::firstOrCreate(['date' => $date]);
     
-        $lessons = Lesson::with('subject')
-            ->whereDate('date', $date)
-            ->orderBy('period', 'asc')
-            ->get();
-    
-        $diary = Diary::where('date', $date)->first(); 
-    
-        return view('home', compact('task', 'date', 'today', 'lessons', 'diary'));
+        return redirect()->route('home');
     }
     
 
 
     function update(Request $request, $id)
     {
-        $today = Carbon::today(); 
 
         $task = Task::find($id);
         $task -> assignments = $request -> assignments;
         $task -> belongings = $request -> belongings;
-        $date = $task -> date;
 
         $task -> save();
 
-        $lessons = Lesson::with('subject')
-            ->whereDate('date', $date)
-            ->orderBy('period', 'asc')
-            ->get();
-    
-        $diary = Diary::where('date', $date)->first(); 
-        
+        $request->session()->put('selected_date', $task->date);
 
-        return view('home', compact('task', 'date', 'today', 'lessons', 'diary'));
+        return redirect()->route('home');
     }
 }
