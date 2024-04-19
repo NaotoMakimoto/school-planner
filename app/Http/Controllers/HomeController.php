@@ -34,4 +34,9 @@ class HomeController extends Controller
         $diary = Diary::where('date', $date)->first(); 
         return view('home', compact('task', 'date', 'today', 'lessons', 'diary'));
     }
+
+    function check()
+    {
+        return view('calendar');
+    }
 }

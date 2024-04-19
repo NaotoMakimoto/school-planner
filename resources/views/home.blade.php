@@ -260,7 +260,9 @@
             </div>
             </div>
         </div>
-
+        <form action="{{ route('calendar.check') }}" method="get">
+            <button type="submit">カレンダー</button>
+        </form>
 
     </div>
 
