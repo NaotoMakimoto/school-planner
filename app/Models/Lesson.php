@@ -15,4 +15,11 @@ class Lesson extends Model
     }
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'date',
+        'period',
+        'subject_id',
+        'content',
+    ];
 }
