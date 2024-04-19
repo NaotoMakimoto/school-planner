@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');
 
@@ -36,4 +36,6 @@ Route::put('/diaries/{id}', [DiaryController::class, 'update'])->name('diaries.u
 Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
 
 Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+
+Route::get('/calendar', [HomeController::class, 'check'])->name('calendar.check');
 
