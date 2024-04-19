@@ -95,7 +95,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel{{ $i }}">感想</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel{{ $i }}">{{ $i }}時間目</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -103,21 +103,21 @@
                                                 @csrf
                                                 @method('put')
                                                 <label>
-                                                    <input type="radio" name="understanding" value="1"> bad
+                                                    <input type="radio" name="understanding" value="1" {{ $lesson->understanding == 1 ? 'checked' : '' }}> bad
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="2"> a bit
+                                                    <input type="radio" name="understanding" value="2" {{ $lesson->understanding == 2 ? 'checked' : '' }}> a bit
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="3"> okay
+                                                    <input type="radio" name="understanding" value="3" {{ $lesson->understanding == 3 ? 'checked' : '' }}> okay
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="4"> good
+                                                    <input type="radio" name="understanding" value="4" {{ $lesson->understanding == 4 ? 'checked' : '' }}> good
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="5"> excellent
+                                                    <input type="radio" name="understanding" value="5" {{ $lesson->understanding == 5 ? 'checked' : '' }}> excellent
                                                 </label>
-                                                <input type="text" name="comment">
+                                                <input type="text" name="comment" value="{{ $lesson->comment }}">
                                             
                                         </div>
                                         <div class="modal-footer">
@@ -135,10 +135,10 @@
         </table>
     </div>
 
-<!-- 授業追加ボタン -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    追加
-  </button>
+    <!-- 授業追加ボタン -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        編集
+    </button>
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -188,7 +188,7 @@
   </div>
 
   <div class="bottom_content">
-        <div>日記</div>
+        <h1>日記</h1>
         @if($diary)
         <div>{{ $diary->mood}}</div>
         <div>{{ $diary->content}}</div>
@@ -210,21 +210,21 @@
                     <form action="{{ route('diaries.store') }}" method="post">
                     @csrf
                     <label>
-                        <input type="radio" name="mood" value="1"> bad
+                        <input type="radio" name="mood" value="1" {{ $diary->mood == 1 ? 'checked' : '' }}> bad
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="2"> a bit
+                        <input type="radio" name="mood" value="2" {{ $diary->mood == 2 ? 'checked' : '' }}> a bit
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="3"> okay
+                        <input type="radio" name="mood" value="3" {{ $diary->mood == 3 ? 'checked' : '' }}> okay
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="4"> good
+                        <input type="radio" name="mood" value="4" {{ $diary->mood == 4 ? 'checked' : '' }}> good
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="5"> excellent
+                        <input type="radio" name="mood" value="5" {{ $diary->mood == 5 ? 'checked' : '' }}> excellent
                     </label>
-                    <textarea name="content" cols="30" rows="10"></textarea>
+                    <textarea name="content" cols="30" rows="10">{{ $diary->content }}</textarea>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

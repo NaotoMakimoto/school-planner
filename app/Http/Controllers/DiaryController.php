@@ -10,14 +10,17 @@ class DiaryController extends Controller
 {
     function store(Request $request) 
     {
-        $diary = new Diary;
         $selected_date = $request->session()->get('selected_date', Carbon::today()->toDateString());
-        $diary -> date = $selected_date;
-        $diary -> mood = $request -> mood;
-        $diary -> content = $request -> content;
-        $diary -> comment = $request -> comment;
-
-        $diary -> save();
+        
+        $diary = Diary::updateOrCreate(
+            [
+                'date' => $selected_date
+            ],
+            [
+                'mood' => $request -> mood,
+                'content' => $request -> content
+            ]
+        );
 
         return redirect() -> route('home');
 
