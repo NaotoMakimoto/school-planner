@@ -103,21 +103,21 @@
                                                 @csrf
                                                 @method('put')
                                                 <label>
-                                                    <input type="radio" name="understanding" value="1" {{ $lesson->understanding == 1 ? 'checked' : '' }}> bad
+                                                    <input type="radio" name="understanding" value="1" {{ optional($lesson)->understanding == 1 ? 'checked' : '' }}> bad
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="2" {{ $lesson->understanding == 2 ? 'checked' : '' }}> a bit
+                                                    <input type="radio" name="understanding" value="2" {{ optional($lesson)->understanding == 2 ? 'checked' : '' }}> a bit
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="3" {{ $lesson->understanding == 3 ? 'checked' : '' }}> okay
+                                                    <input type="radio" name="understanding" value="3" {{ optional($lesson)->understanding == 3 ? 'checked' : '' }}> okay
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="4" {{ $lesson->understanding == 4 ? 'checked' : '' }}> good
+                                                    <input type="radio" name="understanding" value="4" {{ optional($lesson)->understanding == 4 ? 'checked' : '' }}> good
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="5" {{ $lesson->understanding == 5 ? 'checked' : '' }}> excellent
+                                                    <input type="radio" name="understanding" value="5" {{ optional($lesson)->understanding == 5 ? 'checked' : '' }}> excellent
                                                 </label>
-                                                <input type="text" name="comment" value="{{ $lesson->comment }}">
+                                                <input type="text" name="comment" value="{{ optional($lesson)->comment }}">
                                             
                                         </div>
                                         <div class="modal-footer">
