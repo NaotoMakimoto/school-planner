@@ -1,0 +1,32 @@
+/* カレンダーのセルの高さを固定し、それぞれの週の高さを一定にします */
+.fc-daygrid-day-frame {
+    height: 100px; /* または任意の高さ */
+  }
+  
+  /* イベント画像がセル内に収まるように調整します */
+  .fc-event-image {
+    width: 100%; /* 画像の横幅をセルの幅に合わせます */
+    height: 100%; /* 画像の高さをセルの高さに合わせます */
+    object-fit: contain; /* 画像の縦横比を保ちつつ、画像全体がセルに収まるように調整します */
+    max-height: 68px; /* セルの高さに合わせます。これは.fc-daygrid-day-frameの高さと同じ値です */
+  }
+  
+  /* イベントコンテンツに余計なマージンやパディングがないことを確認 */
+  .fc-event-content {
+    padding: 0;
+    margin: 0;
+    
+  }
+  
+  /* FullCalendarのイベント要素内の余白を取り除きます */
+  .fc-event {
+    padding: 0 !important;
+    margin: 0 !important; /* 余白がないことを保証 */
+    height: 100% !important; /* イベントの高さをセルの高さに合わせます */
+    
+  }
+  
+:root {
+    --fc-event-bg-color: none;
+    --fc-event-border-color: none;
+}
