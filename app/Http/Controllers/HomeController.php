@@ -37,6 +37,8 @@ class HomeController extends Controller
 
     function check()
     {
-        return view('calendar');
+        $diaries = Diary::all();
+
+        return view('calendar', compact('diaries'));
     }
 }

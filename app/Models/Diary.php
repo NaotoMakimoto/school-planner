@@ -9,6 +9,8 @@ class Diary extends Model
 {
     use HasFactory;
 
+    protected $dates = ['date'];
+
     protected $fillable = [
         'date',
         'mood',

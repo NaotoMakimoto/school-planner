@@ -210,21 +210,21 @@
                     <form action="{{ route('diaries.store') }}" method="post">
                     @csrf
                     <label>
-                        <input type="radio" name="mood" value="1" {{ $diary->mood == 1 ? 'checked' : '' }}> bad
+                        <input type="radio" name="mood" value="1" {{ optional($diary)->mood == 1 ? 'checked' : '' }}> bad
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="2" {{ $diary->mood == 2 ? 'checked' : '' }}> a bit
+                        <input type="radio" name="mood" value="2" {{ optional($diary)->mood == 2 ? 'checked' : '' }}> a bit
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="3" {{ $diary->mood == 3 ? 'checked' : '' }}> okay
+                        <input type="radio" name="mood" value="3" {{ optional($diary)->mood == 3 ? 'checked' : '' }}> okay
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="4" {{ $diary->mood == 4 ? 'checked' : '' }}> good
+                        <input type="radio" name="mood" value="4" {{ optional($diary)->mood == 4 ? 'checked' : '' }}> good
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="5" {{ $diary->mood == 5 ? 'checked' : '' }}> excellent
+                        <input type="radio" name="mood" value="5" {{ optional($diary)->mood == 5 ? 'checked' : '' }}> excellent
                     </label>
-                    <textarea name="content" cols="30" rows="10">{{ $diary->content }}</textarea>
+                    <textarea name="content" cols="30" rows="10">{{ optional($diary)->content }}</textarea>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
