@@ -14,6 +14,9 @@ class Diary extends Model
     protected $fillable = [
         'date',
         'mood',
+        'question1',
+        'question2',
+        'question3',
         'content',
         'comment'
     ];

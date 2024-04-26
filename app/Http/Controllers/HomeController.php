@@ -21,19 +21,22 @@ class HomeController extends Controller
     }
 
 
-    public function index(Request $request)
+        public function index(Request $request)
     {
         $today = Carbon::today(); 
-        $selected_date = $request->session()->get('selected_date', Carbon::today()->toDateString());
-        $date = $selected_date;
+        // クエリパラメータの 'date' を確認し、存在すればそれを使用
+        $date = $request->query('date', $request->session()->get('selected_date', $today->toDateString()));
+
         $task = Task::whereDate('date', $date)->first();    
         $lessons = Lesson::with('subject')
             ->whereDate('date', $date)
             ->orderBy('period', 'asc') // 'period'を基準に昇順でソート
             ->get();
         $diary = Diary::where('date', $date)->first(); 
+
         return view('home', compact('task', 'date', 'today', 'lessons', 'diary'));
     }
+
 
     function check()
     {

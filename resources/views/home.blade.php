@@ -48,7 +48,7 @@
                 <div class="modal-body">
                     <form action="{{ $task ? route('tasks.update', $task->id): '' }}" method="post">
                     @csrf
-                    @method('put')
+                    @method('PUT')
                     <textarea name="assignments" cols="30" rows="10" >{{ $task->assignments ?? '' }}</textarea>
                     <textarea name="belongings" cols="30" rows="10" >{{ $task->belongings ?? '' }}</textarea>
                         </div>
@@ -82,7 +82,25 @@
                         @endphp
                         <td>{{ $lesson->subject->name ?? '' }}</td>
                         <td>{{ $lesson->content ?? '' }}</td>
-                        <td>{{ $lesson->understanding ?? '' }}</td>
+                        <td>{{ $lesson->understanding ?? '' }}
+                            {{-- @switch($lesson->understanding ?? '')
+                            @case(1)
+                                <img src="image/face_img1.png" alt="">
+                                @break
+                            @case(2)
+                                <img src="image/face_img2.png" alt="">
+                                @break
+                            @case(3)
+                                <img src="image/face_img3.png" alt="">
+                                @break
+                            @case(4)
+                                <img src="image/face_img4.png" alt="">
+                                @break
+                            @case(5)
+                                <img src="image/face_img5.png" alt="">
+                                @break           
+                            @endswitch --}}
+                        </td>
                         <td>{{ $lesson->comment ?? '' }}</td>
                         <td>
                             <!-- 生徒の感想ボタン -->
@@ -190,8 +208,39 @@
   <div class="bottom_content">
         <h1>日記</h1>
         @if($diary)
-        <div>{{ $diary->mood}}</div>
-        <div>{{ $diary->content}}</div>
+        <div>
+            {{ $diary->mood }}
+            {{-- @switch($diary->mood)
+                @case(1)
+                    <img src="image/face_img1.png" alt="">
+                    @break
+                @case(2)
+                    <img src="image/face_img2.png" alt="">
+                    @break
+                @case(3)
+                    <img src="image/face_img3.png" alt="">
+                    @break
+                @case(4)
+                    <img src="image/face_img4.png" alt="">
+                    @break
+                @case(5)
+                    <img src="image/face_img5.png" alt="">
+                    @break           
+                @endswitch --}}
+        </div>
+        <div>
+           <table>
+                <tr>
+                    <td>{{ $diary->question1 }}</td>
+                    <td>友達</td>
+                    <td>{{ $diary->question2 }}</td>
+                    <td>困りごと</td>
+                    <td>{{ $diary->question3 }}</td>
+                    <td>困りごと</td>
+                </tr>
+           </table>
+        </div>
+        <div>{{ $diary->content }}</div>
         <div>{{ $diary->comment }}</div>
         @endif
         <!-- 今日の気分と日記を投稿するボタン -->
@@ -209,22 +258,47 @@
                 <div class="modal-body">
                     <form action="{{ route('diaries.store') }}" method="post">
                     @csrf
+                    <p>今日の気分は？</p>
                     <label>
-                        <input type="radio" name="mood" value="1" {{ optional($diary)->mood == 1 ? 'checked' : '' }}> bad
+                        <input type="radio" name="mood" value="1" {{ optional($diary)->mood == 1 ? 'checked' : '' }}> 大変だった
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="2" {{ optional($diary)->mood == 2 ? 'checked' : '' }}> a bit
+                        <input type="radio" name="mood" value="2" {{ optional($diary)->mood == 2 ? 'checked' : '' }}> 疲れた～
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="3" {{ optional($diary)->mood == 3 ? 'checked' : '' }}> okay
+                        <input type="radio" name="mood" value="3" {{ optional($diary)->mood == 3 ? 'checked' : '' }}> いい感じ
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="4" {{ optional($diary)->mood == 4 ? 'checked' : '' }}> good
+                        <input type="radio" name="mood" value="4" {{ optional($diary)->mood == 4 ? 'checked' : '' }}> ハッピー！
                     </label>
                     <label>
-                        <input type="radio" name="mood" value="5" {{ optional($diary)->mood == 5 ? 'checked' : '' }}> excellent
+                        <input type="radio" name="mood" value="5" {{ optional($diary)->mood == 5 ? 'checked' : '' }}> 最高！！
                     </label>
-                    <textarea name="content" cols="30" rows="10">{{ optional($diary)->content }}</textarea>
+
+                    <ul>
+                        <li>
+                          <label>
+                            <input type="checkbox" name="questions[question1]" value="1" {{ optional($diary)->question1 == 1 ? 'checked' : '' }}>
+                            <span class="checkbox-text">友達と楽しく生活できている</span>
+                          </label>
+                        </li>
+                        <li>
+                          <label>
+                            <input type="checkbox" name="questions[question2]" value="1" {{ optional($diary)->question2 == 1 ? 'checked' : '' }}>
+                            <span class="checkbox-text">困っていることはない</span>
+                          </label>
+                        </li>
+                        <li>
+                          <label>
+                            <input type="checkbox" name="questions[question3]" value="1" {{ optional($diary)->question3 == 1 ? 'checked' : '' }}>
+                            <span class="checkbox-text">困っていることはない</span>
+                          </label>
+                        </li>
+                    </ul>
+                    
+
+                    <p>今日あったことを書こう！</p>
+                    <textarea name="content" cols="50" rows="5">{{ optional($diary)->content }}</textarea>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
