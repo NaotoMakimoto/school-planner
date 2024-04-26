@@ -19,6 +19,8 @@
             <input type="date" name="date" value="{{ $date }}" required>
             <button type="submit" class="btn btn-primary">選択</button>
         </form>
+
+        <h4>{{ $user->grade }}年{{ $user->class }}組{{ $user->attendance_number }}番 {{ $user->name }}</h4>
         
         <div>
             <div>
@@ -49,8 +51,10 @@
                     <form action="{{ $task ? route('tasks.update', $task->id): '' }}" method="post">
                     @csrf
                     @method('PUT')
-                    <textarea name="assignments" cols="30" rows="10" >{{ $task->assignments ?? '' }}</textarea>
-                    <textarea name="belongings" cols="30" rows="10" >{{ $task->belongings ?? '' }}</textarea>
+                    <p>宿題</p>
+                    <textarea name="assignments" cols="50" rows="5" >{{ $task->assignments ?? '' }}</textarea>
+                    <p>持ち物</p>
+                    <textarea name="belongings" cols="50" rows="5" >{{ $task->belongings ?? '' }}</textarea>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

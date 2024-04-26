@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Lesson;
 use App\Models\Diary;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +26,7 @@ class HomeController extends Controller
 
         public function index(Request $request)
     {
+        $user = Auth::user();
         $today = Carbon::today(); 
         // クエリパラメータの 'date' を確認し、存在すればそれを使用
         $date = $request->query('date', $request->session()->get('selected_date', $today->toDateString()));
@@ -34,7 +38,7 @@ class HomeController extends Controller
             ->get();
         $diary = Diary::where('date', $date)->first(); 
 
-        return view('home', compact('task', 'date', 'today', 'lessons', 'diary'));
+        return view('home', compact('task', 'date', 'today', 'lessons', 'diary', 'user'));
     }
 
 
