@@ -122,6 +122,7 @@ html {
 
 .td_period {
     width: 6vh;
+    background-color: rgba(34,44,65,0.1);
 }
 
 .td_subject {
@@ -136,9 +137,104 @@ html {
     width: 6vh;
 }
 
+.td_comment {
+    font-size: 1.2rem !important;
+}
+
 .td_btn {
     width: 2.5rem;
     padding: 0 0 0 auto;
     border: none !important;
 }
 
+
+/*-----------日記---------------*/
+.bottom_content {
+    display: flex;
+    width: 95vw;
+    height: 35vh;
+    margin: 0 auto;
+}
+
+.bottom_content_left {
+    width: 18vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-top: 1rem; */
+}
+
+.bottom_content_left_top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bottom_content_left_top h1 {
+    font-size: 1.8rem;
+    margin: 0.5rem 1rem;
+}
+
+.mood_img_box {
+    width: 10vw;
+
+}
+
+.mood_img_box img {
+    width: 100%;
+}
+
+.check_box {
+    width: 1rem;
+}
+
+.check_box img {
+    width: 100%;
+}
+
+.bottom_content_right {
+    width: 77vw;
+}
+
+#btn_class {
+    margin-left: 15vw;
+}
+
+.diary_box {
+    display: flex;
+    flex-direction: row;
+    width: 77vw;
+    height: 23vh;
+    margin-top: 0.5rem;
+}
+
+.diary_box_left {
+    width: 77%;
+    border: 1px gray solid;
+    padding: 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.diary_text {
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 98.5%, #000 100%);
+    background-repeat: repeat-y;
+    background-size: 100% 25%;
+    line-height: 225%;
+}
+
+.diary_box_right {
+    width: 23%;
+    border: 1px gray solid;
+    position: relative;
+    padding: 0.5rem;
+}
+
+.diary_box_right p {
+    font-size: 1.2rem;
+}
+
+#btn_teacher_comment {
+    position: absolute;
+    right: 0.3rem;
+    bottom: 0.3rem;
+}

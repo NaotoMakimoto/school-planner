@@ -66,15 +66,7 @@
     <div class="middle_content">
         <p>理解度　1：うーん…　2：まあまあ　3：いい感じ　4：ほとんどできた　5：パーフェクト！</p>
         <table class="class_table">
-            {{-- <thead>
-                <tr>
-                    <th>Period</th>
-                    <th>Subject</th>
-                    <th>Content</th>
-                    <th>Understanding</th>
-                    <th>Comment</th>
-                </tr>
-            </thead> --}}
+           
             <tbody>
                 @for ($i = 1; $i <= 6; $i++)
                     <tr>
@@ -115,7 +107,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel{{ $i }}">{{ $i }}時間目</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel{{ $i }}">{{ $i }}時間目　{{ $lesson->subject->name }}　{{ $lesson->content }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -161,8 +153,133 @@
         </table>
     </div>
 
+
+
+  <div class="bottom_content">
+    <div class="bottom_content_left">
+        <div class="bottom_content_left_top">
+            <h1>日記</h1>
+        
+            <!-- 今日の気分と日記を投稿するボタン -->
+            <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal_diary">
+                ＋
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal_diary" tabindex="-1" aria-labelledby="exampleModalLabel_diary" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel_diary">日記</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('diaries.store') }}" method="post">
+                        @csrf
+                        <p>今日の気分は？</p>
+                        <label>
+                            <input type="radio" name="mood" value="1" {{ optional($diary)->mood == 1 ? 'checked' : '' }}> 大変だった
+                        </label>
+                        <label>
+                            <input type="radio" name="mood" value="2" {{ optional($diary)->mood == 2 ? 'checked' : '' }}> 疲れた～
+                        </label>
+                        <label>
+                            <input type="radio" name="mood" value="3" {{ optional($diary)->mood == 3 ? 'checked' : '' }}> いい感じ
+                        </label>
+                        <label>
+                            <input type="radio" name="mood" value="4" {{ optional($diary)->mood == 4 ? 'checked' : '' }}> ハッピー！
+                        </label>
+                        <label>
+                            <input type="radio" name="mood" value="5" {{ optional($diary)->mood == 5 ? 'checked' : '' }}> 最高！！
+                        </label>
+    
+                        <ul>
+                            <li>
+                              <label>
+                                <input type="checkbox" name="questions[question1]" value="1" {{ optional($diary)->question1 == 1 ? 'checked' : '' }}>
+                                <span class="checkbox-text">体調は良い</span>
+                              </label>
+                            </li>
+                            <li>
+                              <label>
+                                <input type="checkbox" name="questions[question2]" value="1" {{ optional($diary)->question2 == 1 ? 'checked' : '' }}>
+                                <span class="checkbox-text">友達と楽しく生活できている</span>
+                              </label>
+                            </li>
+                            <li>
+                              <label>
+                                <input type="checkbox" name="questions[question3]" value="1" {{ optional($diary)->question3 == 1 ? 'checked' : '' }}>
+                                <span class="checkbox-text">困っていることはない</span>
+                              </label>
+                            </li>
+                        </ul>
+                        
+    
+                        <p>今日あったことを書こう！</p>
+                        <textarea name="content" cols="70" rows="5">{{ optional($diary)->content }}</textarea>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        @if($diary)
+        <div class="mood_img_box">
+            {{-- {{ $diary->mood }} --}}
+            @switch($diary->mood)
+                @case(1)
+                    <img src="image/face_img1.png" alt="">
+                    @break
+                @case(2)
+                    <img src="image/face_img2.png" alt="">
+                    @break
+                @case(3)
+                    <img src="image/face_img3.png" alt="">
+                    @break
+                @case(4)
+                    <img src="image/face_img4.png" alt="">
+                    @break
+                @case(5)
+                    <img src="image/face_img5.png" alt="">
+                    @break           
+                @endswitch
+        </div>
+        <div>
+           <table>
+                <tr>
+                    <td class="check_box">
+                        @if($diary->question1 == 1) 
+                            <img src="image/red-check.jpeg" alt="">
+                        @endif
+                    </td>
+                    <td>体調　</td>
+                </tr>
+                <tr>
+                    <td class="check_box">
+                        @if($diary->question2 == 1) 
+                            <img src="image/red-check.jpeg" alt="">
+                        @endif
+                    </td>
+                    <td>友達　</td>
+                </tr>                
+                <tr>   
+                    <td class="check_box">
+                        @if($diary->question3 == 1) 
+                            <img src="image/red-check.jpeg" alt="">
+                        @endif
+                    </td>
+                    <td>困りごと</td>
+                </tr>
+           </table>
+        </div>
+    </div>
+<div class="bottom_content_right">
     <!-- 授業追加ボタン -->
-    <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn_plus" id="btn_class" data-bs-toggle="modal" data-bs-target="#exampleModal">
         ＋
     </button>
   
@@ -200,7 +317,7 @@
                 <option value="12">総合</option>
                 <option value="13">学活</option>
             </select>
-            <input type="text" name="content">
+            <input type="text" size="30" name="content">
             
           
         </div>
@@ -212,139 +329,51 @@
       </div>
     </div>
   </div>
-
-  <div class="bottom_content">
-        <h1>日記</h1>
-        @if($diary)
-        <div>
-            {{ $diary->mood }}
-            {{-- @switch($diary->mood)
-                @case(1)
-                    <img src="image/face_img1.png" alt="">
-                    @break
-                @case(2)
-                    <img src="image/face_img2.png" alt="">
-                    @break
-                @case(3)
-                    <img src="image/face_img3.png" alt="">
-                    @break
-                @case(4)
-                    <img src="image/face_img4.png" alt="">
-                    @break
-                @case(5)
-                    <img src="image/face_img5.png" alt="">
-                    @break           
-                @endswitch --}}
-        </div>
-        <div>
-           <table>
-                <tr>
-                    <td>{{ $diary->question1 }}</td>
-                    <td>友達</td>
-                    <td>{{ $diary->question2 }}</td>
-                    <td>困りごと</td>
-                    <td>{{ $diary->question3 }}</td>
-                    <td>困りごと</td>
-                </tr>
-           </table>
-        </div>
-        <div>{{ $diary->content }}</div>
-        <div>{{ $diary->comment }}</div>
-        @endif
-        <!-- 今日の気分と日記を投稿するボタン -->
-        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal_diary">
-            日記
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal_diary" tabindex="-1" aria-labelledby="exampleModalLabel_diary" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel_diary">日記</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="diary_box">
+        <div class="diary_box_left diary_text">{{ $diary->content }}</div>
+        <div class="diary_box_right">
+            <p>{{ $diary->comment }}</p>
+            @endif
+    
+               <!-- 先生のコメントボタン -->
+            <button type="button" class="btn_plus" id="btn_teacher_comment" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
+                ＋
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="Modal_diary_comment" tabindex="-1" aria-labelledby="ModalLabel_diary_comment" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel_diary_comment">先生のコメント</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ $diary ? route('diaries.update', $diary->id): '' }}" method="post">
+                        @csrf
+                        @method('put')
+                        <textarea name="comment" cols="60" rows="5">{{ $diary->comment ?? '' }}</textarea>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('diaries.store') }}" method="post">
-                    @csrf
-                    <p>今日の気分は？</p>
-                    <label>
-                        <input type="radio" name="mood" value="1" {{ optional($diary)->mood == 1 ? 'checked' : '' }}> 大変だった
-                    </label>
-                    <label>
-                        <input type="radio" name="mood" value="2" {{ optional($diary)->mood == 2 ? 'checked' : '' }}> 疲れた～
-                    </label>
-                    <label>
-                        <input type="radio" name="mood" value="3" {{ optional($diary)->mood == 3 ? 'checked' : '' }}> いい感じ
-                    </label>
-                    <label>
-                        <input type="radio" name="mood" value="4" {{ optional($diary)->mood == 4 ? 'checked' : '' }}> ハッピー！
-                    </label>
-                    <label>
-                        <input type="radio" name="mood" value="5" {{ optional($diary)->mood == 5 ? 'checked' : '' }}> 最高！！
-                    </label>
-
-                    <ul>
-                        <li>
-                          <label>
-                            <input type="checkbox" name="questions[question1]" value="1" {{ optional($diary)->question1 == 1 ? 'checked' : '' }}>
-                            <span class="checkbox-text">友達と楽しく生活できている</span>
-                          </label>
-                        </li>
-                        <li>
-                          <label>
-                            <input type="checkbox" name="questions[question2]" value="1" {{ optional($diary)->question2 == 1 ? 'checked' : '' }}>
-                            <span class="checkbox-text">困っていることはない</span>
-                          </label>
-                        </li>
-                        <li>
-                          <label>
-                            <input type="checkbox" name="questions[question3]" value="1" {{ optional($diary)->question3 == 1 ? 'checked' : '' }}>
-                            <span class="checkbox-text">困っていることはない</span>
-                          </label>
-                        </li>
-                    </ul>
-                    
-
-                    <p>今日あったことを書こう！</p>
-                    <textarea name="content" cols="50" rows="5">{{ optional($diary)->content }}</textarea>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-            </div>
-            </div>
-        </div>
-        <!-- 先生のコメントボタン -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
-            コメント
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="Modal_diary_comment" tabindex="-1" aria-labelledby="ModalLabel_diary_comment" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel_diary_comment">先生のコメント</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ $diary ? route('diaries.update', $diary->id): '' }}" method="post">
-                    @csrf
-                    @method('put')
-                    <textarea name="comment" cols="30" rows="10">{{ $diary->comment ?? '' }}</textarea>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-            </div>
             </div>
         </div>
+    
+    </div>
+            
+</div>
+        
+       
+     
+
+{{--         カレンダー
         <form action="{{ route('calendar.check') }}" method="get">
             <button type="submit">カレンダー</button>
-        </form>
+        </form> --}}
 
     </div>
 
