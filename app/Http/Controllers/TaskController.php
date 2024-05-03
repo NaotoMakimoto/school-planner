@@ -31,6 +31,7 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task -> assignments = $request -> assignments;
         $task -> belongings = $request -> belongings;
+        $task -> announcements = $request -> announcements;
 
         $task -> save();
 

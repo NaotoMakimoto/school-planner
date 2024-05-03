@@ -1,44 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="">
-    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
+@extends('layouts.app_original')
+@section('content')
     <div class="top_content">
         {{-- <div>{{ $today }}</div> --}}
-
-        <form method="post" action="{{ route('tasks.store') }}">
-            @csrf
-            <input type="date" name="date" value="{{ $date }}" required>
-            <button type="submit" class="btn btn-primary">選択</button>
-        </form>
-
-        <h4>{{ $user->grade }}年{{ $user->class }}組{{ $user->attendance_number }}番 {{ $user->name }}</h4>
-        
-        <div>
-            <div>
-                <h1>宿題</h1> 
+        <div class='top_content_left'>
+            <form method="post" action="{{ route('tasks.store') }}">
+                @csrf
+                <input type="date" name="date" value="{{ $date }}" required>
+                <button type="submit" class='btn_plus'>＋</button>
+            </form> 
+            <hr>
+            <div class="top_content_left_bottom">
                 @if($task)                  
-                <div>{{ $task->assignments}}</div>
-                @endif
-                <h1>持ち物</h1>
-                @if($task)
-                <div>{{ $task->belongings}}</div>
+                <p>{{ $task->announcements}}</p>
                 @endif
             </div>
-           
+        </div>       
+        <div class="top_content_right">
+            <div class="taskbox">
+                <h1>宿題</h1> 
+                @if($task)                  
+                <p>{{ $task->assignments}}</p>
+                @endif
+            </div>
+            <div class="taskbox">
+                <h1>持ち物</h1>
+                @if($task)
+                <p>{{ $task->belongings}}</p>
+                @endif
+            </div>
+            <!-- タスク追加ボタン -->
+            <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#Modal_task">
+                ＋
+            </button>
         </div>
-         <!-- タスク追加ボタン -->
-         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_task">
-            編集
-        </button>
+        
         <!-- Modal -->
         <div class="modal fade" id="Modal_task" tabindex="-1" aria-labelledby="ModalLabel_task" aria-hidden="true">
             <div class="modal-dialog">
@@ -51,6 +46,8 @@
                     <form action="{{ $task ? route('tasks.update', $task->id): '' }}" method="post">
                     @csrf
                     @method('PUT')
+                    <p>連絡事項</p>
+                    <textarea name="announcements" cols="50" rows="5" >{{ $task->announcements ?? '' }}</textarea>
                     <p>宿題</p>
                     <textarea name="assignments" cols="50" rows="5" >{{ $task->assignments ?? '' }}</textarea>
                     <p>持ち物</p>
@@ -67,8 +64,9 @@
 
     </div>
     <div class="middle_content">
-        <table>
-            <thead>
+        <p>理解度　1：うーん…　2：まあまあ　3：いい感じ　4：ほとんどできた　5：パーフェクト！</p>
+        <table class="class_table">
+            {{-- <thead>
                 <tr>
                     <th>Period</th>
                     <th>Subject</th>
@@ -76,17 +74,17 @@
                     <th>Understanding</th>
                     <th>Comment</th>
                 </tr>
-            </thead>
+            </thead> --}}
             <tbody>
                 @for ($i = 1; $i <= 6; $i++)
                     <tr>
-                        <td>{{ $i }}</td>
+                        <td class="td_period">{{ $i }}</td>
                         @php
                             $lesson = $lessons->firstWhere('period', $i);
                         @endphp
-                        <td>{{ $lesson->subject->name ?? '' }}</td>
-                        <td>{{ $lesson->content ?? '' }}</td>
-                        <td>{{ $lesson->understanding ?? '' }}
+                        <td class="td_subject">{{ $lesson->subject->name ?? '' }}</td>
+                        <td class="td_content">{{ $lesson->content ?? '' }}</td>
+                        <td class="td_understanding">{{ $lesson->understanding ?? '' }}
                             {{-- @switch($lesson->understanding ?? '')
                             @case(1)
                                 <img src="image/face_img1.png" alt="">
@@ -105,11 +103,11 @@
                                 @break           
                             @endswitch --}}
                         </td>
-                        <td>{{ $lesson->comment ?? '' }}</td>
-                        <td>
+                        <td class="td_comment">{{ $lesson->comment ?? '' }}</td>
+                        <td class="td_btn">
                             <!-- 生徒の感想ボタン -->
-                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $i }}">
-                                感想
+                            <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $i }}">
+                                ＋
                             </button>
                             
                             <!-- Modal -->
@@ -121,26 +119,32 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+                
+                                            <h5>どれくらい理解できたかな？</h5>
+                                            <p>1：うーん…　2：まあまあ　3：いい感じ　4：ほとんどできた　5：パーフェクト！</p>
                                             <form action="{{ $lesson ? route('lessons.update', $lesson->id) : '' }}" method="post">
                                                 @csrf
                                                 @method('put')
                                                 <label>
-                                                    <input type="radio" name="understanding" value="1" {{ optional($lesson)->understanding == 1 ? 'checked' : '' }}> bad
+                                                    <input type="radio" name="understanding" value="1" {{ optional($lesson)->understanding == 1 ? 'checked' : '' }}> 1　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="2" {{ optional($lesson)->understanding == 2 ? 'checked' : '' }}> a bit
+                                                    <input type="radio" name="understanding" value="2" {{ optional($lesson)->understanding == 2 ? 'checked' : '' }}> 2　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="3" {{ optional($lesson)->understanding == 3 ? 'checked' : '' }}> okay
+                                                    <input type="radio" name="understanding" value="3" {{ optional($lesson)->understanding == 3 ? 'checked' : '' }}> 3　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="4" {{ optional($lesson)->understanding == 4 ? 'checked' : '' }}> good
+                                                    <input type="radio" name="understanding" value="4" {{ optional($lesson)->understanding == 4 ? 'checked' : '' }}> 4　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="5" {{ optional($lesson)->understanding == 5 ? 'checked' : '' }}> excellent
+                                                    <input type="radio" name="understanding" value="5" {{ optional($lesson)->understanding == 5 ? 'checked' : '' }}> 5　
                                                 </label>
-                                                <input type="text" name="comment" value="{{ optional($lesson)->comment }}">
-                                            
+                                                <br><br><br>
+                                                <h5>感想</h5>
+                                                <p>できるようになったこと・難しかったことを書こう</p>
+                                                
+                                                <input type="text" size='50' name="comment" value="{{ optional($lesson)->comment }}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -158,8 +162,8 @@
     </div>
 
     <!-- 授業追加ボタン -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        編集
+    <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        ＋
     </button>
   
   <!-- Modal -->
@@ -344,6 +348,7 @@
 
     </div>
 
+    @endsection
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+

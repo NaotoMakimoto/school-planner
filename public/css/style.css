@@ -1,0 +1,144 @@
+html {
+    overflow: hidden;
+} 
+
+
+/*-----モーダル------*/
+.modal {
+    --bs-modal-width: 60vw !important;
+}
+
+.modal-body p {
+    font-size: 1.1rem !important;
+    line-height: 2.5rem;
+}
+
+
+/* -------＋ボタン -----------*/
+.btn_plus {
+    background-color: 344465;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0;
+    
+}
+
+.btn_plus:hover {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+/* ---- トップコンテンツ -----*/
+.top_content {
+    width: 95vw;
+    height: 20vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem auto 0;
+}
+
+.top_content_left {
+    width: 25vw;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.top_content_left hr {
+    width: 20vw;
+}
+
+.top_content_left_bottom {
+    width: 23vw;
+    height: 10vh;
+}
+
+.top_content_left_bottom p {
+    font-size: 1.3rem;
+    margin: 0;
+        
+}
+
+
+.top_content_right {
+    display: flex;
+    width: 70vw;
+    height: 20vh;
+}
+
+.taskbox {
+    width: 33vw;
+    height: 15vh;
+    border: 1px gray solid;
+    padding: 0.3rem;
+}
+
+.taskbox h1 {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.taskbox p {
+    font-size: 1.1rem;
+}
+
+.top_content_right button {
+    margin: auto 0 0 0;
+}
+
+
+/* ----- 授業 -------*/
+.middle_content {
+    width: 95vw;
+    height: 40vh;
+    margin: 0 auto;
+}
+
+.middle_content p {
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.class_table {
+    width: 100%;
+    height: 90%;
+}
+
+.class_table td{
+    border: 1px solid gray;
+    font-size: 1.4rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.td_period {
+    width: 6vh;
+}
+
+.td_subject {
+    width: 5rem;
+}
+
+.td_content {
+    width: 15rem;
+}
+
+.td_understanding {
+    width: 6vh;
+}
+
+.td_btn {
+    width: 2.5rem;
+    padding: 0 0 0 auto;
+    border: none !important;
+}
+
