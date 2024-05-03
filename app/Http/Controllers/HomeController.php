@@ -44,8 +44,9 @@ class HomeController extends Controller
 
     function check()
     {
+        $user = Auth::user();
         $diaries = Diary::all();
 
-        return view('calendar', compact('diaries'));
+        return view('calendar', compact('diaries', 'user'));
     }
 }

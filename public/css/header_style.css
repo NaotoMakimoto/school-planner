@@ -3,6 +3,7 @@
     height: 5vh;
     background-color: 344465;
     position: relative;
+    
 }
 
 .head p {
@@ -14,3 +15,84 @@
     transform: translateY(-50%);
     margin: 0;
 }
+
+/*---------ハンバーガー-------------*/
+ 
+/* html {
+    scroll-behavior: smooth;
+  } */
+  
+  .hamburger {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+    width: 4vh;
+    height: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 999;
+  }
+  
+  .hamburger .bar {
+    width: 4vh;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    display: block;
+    position: absolute;
+    transition: all 0.3s;
+  }
+  
+  .hamburger .bar-top {
+    transform: translate(0, -8px);
+  }
+  
+  .hamburger .bar-bottom {
+    transform: translate(0, 8px);
+  }
+  
+  .hamburger.close .bar-middle {
+    opacity: 0;
+  }
+  
+  .hamburger.close .bar-top {
+    transform: translate(0, 0) rotate(45deg);
+  }
+  
+  .hamburger.close .bar-bottom {
+    transform: translate(0, 0) rotate(-45deg);
+  }
+  
+  .nav-menu {
+    position: fixed;
+    width: 280px;
+    height: 100%;
+    background: #000;
+    opacity: 0.8;
+    color: #fff;
+    top: 0;
+    left: -100%;
+    transition: all 0.5s;
+  }
+  
+  .nav-menu ul {
+    margin-top: 100px;
+  }
+  
+  .nav-menu li {
+    margin-bottom: 30px;
+  }
+  
+  .nav-menu a {
+    text-align: center;
+    font-size: 30px;
+  }
+  
+  .nav-menu.close {
+    left: 0;
+  }
+  

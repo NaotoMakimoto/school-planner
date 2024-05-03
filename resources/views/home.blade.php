@@ -107,7 +107,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel{{ $i }}">{{ $i }}時間目　{{ $lesson->subject->name }}　{{ $lesson->content }}</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel{{ $i }}">{{ $i }}時間目　{{ optional(optional($lesson)->subject)->name }}　{{ optional($lesson)->content }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -227,10 +227,8 @@
             </div>
         </div>
         
-        @if($diary)
         <div class="mood_img_box">
-            {{-- {{ $diary->mood }} --}}
-            @switch($diary->mood)
+            @switch(optional($diary)->mood)
                 @case(1)
                     <img src="image/face_img1.png" alt="">
                     @break
@@ -252,7 +250,7 @@
            <table>
                 <tr>
                     <td class="check_box">
-                        @if($diary->question1 == 1) 
+                        @if(optional($diary)->question1 == 1) 
                             <img src="image/red-check.jpeg" alt="">
                         @endif
                     </td>
@@ -260,7 +258,7 @@
                 </tr>
                 <tr>
                     <td class="check_box">
-                        @if($diary->question2 == 1) 
+                        @if(optional($diary)->question2 == 1) 
                             <img src="image/red-check.jpeg" alt="">
                         @endif
                     </td>
@@ -268,7 +266,7 @@
                 </tr>                
                 <tr>   
                     <td class="check_box">
-                        @if($diary->question3 == 1) 
+                        @if(optional($diary)->question3 == 1) 
                             <img src="image/red-check.jpeg" alt="">
                         @endif
                     </td>
@@ -330,10 +328,9 @@
     </div>
   </div>
     <div class="diary_box">
-        <div class="diary_box_left diary_text">{{ $diary->content }}</div>
+        <div class="diary_box_left diary_text">{{ optional($diary)->content }}</div>
         <div class="diary_box_right">
-            <p>{{ $diary->comment }}</p>
-            @endif
+            <p>{{ optional($diary)->comment }}</p>
     
                <!-- 先生のコメントボタン -->
             <button type="button" class="btn_plus" id="btn_teacher_comment" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
@@ -370,10 +367,8 @@
        
      
 
-{{--         カレンダー
-        <form action="{{ route('calendar.check') }}" method="get">
-            <button type="submit">カレンダー</button>
-        </form> --}}
+      
+   
 
     </div>
 

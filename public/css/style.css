@@ -2,7 +2,6 @@ html {
     overflow: hidden;
 } 
 
-
 /*-----モーダル------*/
 .modal {
     --bs-modal-width: 60vw !important;

@@ -13,6 +13,25 @@
 </head>
 <body>
     <header class="head">
+        {{-- ハンバーガー --}}
+        <div class="hamburger" id="hamburger" onclick="hamburgerClose()">
+            <span class="bar bar-top"></span>
+            <span class="bar bar-middle"></span>
+            <span class="bar bar-bottom"></span>
+        </div>
+        <nav class="nav-menu" id="nav-menu">
+            <ul>
+              <li>
+                <form action="{{ route('calendar.check') }}" method="get">
+                    <button type="submit">カレンダー</button>
+                </form>
+              </li>
+              <li><a href="#">menu2</a></li>
+              <li><a href="#">menu3</a></li>
+              <li><a href="#">menu4</a></li>
+            </ul>
+        </nav>
+
         <p>{{ $user->grade }}年{{ $user->class }}組{{ $user->attendance_number }}番 {{ $user->name }}</p>
     </header>
 
@@ -21,5 +40,6 @@
     <footer>
 
     </footer>
+    <script src="js/script.js"></script>
 </body>
 </html>
