@@ -9,10 +9,16 @@ class Diary extends Model
 {
     use HasFactory;
 
+    function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     protected $dates = ['date'];
 
     protected $fillable = [
         'date',
+        'user_id',
         'mood',
         'question1',
         'question2',

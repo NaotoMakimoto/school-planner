@@ -14,6 +14,13 @@ class Lesson extends Model
         return $this->belongsTo('App\Models\Subject');
     }
 
+    function users()
+    {
+        return $this->hasMany('App\Models\User');
+    }
+
+    
+
     public $timestamps = false;
 
     protected $fillable = [

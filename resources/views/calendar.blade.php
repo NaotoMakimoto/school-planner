@@ -31,6 +31,6 @@
 
     
 </body>
-{{-- 
-@endsection --}}
+
+{{-- @endsection --}}
 </html>

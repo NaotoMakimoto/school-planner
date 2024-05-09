@@ -9,4 +9,11 @@ class Task extends Model
 {
     use HasFactory;
     protected $fillable = ['date'];
+
+    function users() 
+    {
+        return $this->hasMany('App\Models\User');
+    }
+
+    
 }

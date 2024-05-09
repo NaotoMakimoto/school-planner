@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Diary;
+use Illuminate\Support\Facades\Auth;
+
 
 class DiaryController extends Controller
 {
@@ -13,12 +15,17 @@ class DiaryController extends Controller
         $selected_date = $request->session()->get('selected_date', Carbon::today()->toDateString());
         
         $questions = $request->input('questions', []);
+
+        $userId = Auth::id();
         
         $diary = Diary::updateOrCreate(
             [
+                'user_id' => $userId,
                 'date' => $selected_date
+                
             ],
             [
+               
                 'mood' => $request->mood,
                 'content' => $request->content,
                 // 'questions' 配列から個々の値を取得し、存在しない場合は 0 を設定
