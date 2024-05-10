@@ -63,7 +63,59 @@
         </div>
 
     </div>
+
+    {{----- 授業 -------}}
     <div class="middle_content">
+          <!-- 授業追加ボタン -->
+    <button type="button" class="btn_plus" id="btn_class" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        ＋
+    </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">授業</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('lessons.store') }}" method="post">
+            @csrf
+            <select name="period">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <select name="subject_id">
+                <option value="1">国語</option>
+                <option value="2">算数</option>
+                <option value="3">英語</option>
+                <option value="4">社会</option>
+                <option value="5">理科</option>
+                <option value="6">道徳</option>
+                <option value="7">体育</option>
+                <option value="8">図工</option>
+                <option value="9">音楽</option>
+                <option value="10">家庭科</option>
+                <option value="11">生活</option>
+                <option value="12">総合</option>
+                <option value="13">学活</option>
+            </select>
+            <input type="text" size="30" name="content">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+            </form>
+      </div>
+    </div>
+  </div>
+
         <p>理解度　1：うーん…　2：まあまあ　3：いい感じ　4：ほとんどできた　5：パーフェクト！</p>
         <table class="class_table">
            
@@ -73,10 +125,16 @@
                         <td class="td_period">{{ $i }}</td>
                         @php
                             $lesson = $lessons->firstWhere('period', $i);
+                            if($lesson){
+                                $studentLesson = $studentLessons->firstWhere('lesson_id', $lesson->id);
+                            } else {
+                                $studentLesson = null;
+                            }
                         @endphp
                         <td class="td_subject">{{ $lesson->subject->name ?? '' }}</td>
                         <td class="td_content">{{ $lesson->content ?? '' }}</td>
-                        <td class="td_understanding">{{ $lesson->understanding ?? '' }}
+                        <td class="td_understanding">{{ $studentLesson->understanding ?? '' }}
+                            
                             {{-- @switch($lesson->understanding ?? '')
                             @case(1)
                                 <img src="image/face_img1.png" alt="">
@@ -95,7 +153,7 @@
                                 @break           
                             @endswitch --}}
                         </td>
-                        <td class="td_comment">{{ $lesson->comment ?? '' }}</td>
+                        <td class="td_comment">{{ $studentLesson->comment ?? '' }}</td>
                         <td class="td_btn">
                             <!-- 生徒の感想ボタン -->
                             <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $i }}">
@@ -114,35 +172,34 @@
                 
                                             <h5>どれくらい理解できたかな？</h5>
                                             <p>1：うーん…　2：まあまあ　3：いい感じ　4：ほとんどできた　5：パーフェクト！</p>
-                                            <form action="{{ $lesson ? route('lessons.update', $lesson->id) : '' }}" method="post">
+                                            <form action="{{ $lesson ? route('studentLessons.store', ['id' => $lesson->id]) : '' }}" method="post">
                                                 @csrf
-                                                @method('put')
                                                 <label>
-                                                    <input type="radio" name="understanding" value="1" {{ optional($lesson)->understanding == 1 ? 'checked' : '' }}> 1　
+                                                    <input type="radio" name="understanding" value="1" {{ optional($studentLesson)->understanding == 1 ? 'checked' : '' }}> 1　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="2" {{ optional($lesson)->understanding == 2 ? 'checked' : '' }}> 2　
+                                                    <input type="radio" name="understanding" value="2" {{ optional($studentLesson)->understanding == 2 ? 'checked' : '' }}> 2　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="3" {{ optional($lesson)->understanding == 3 ? 'checked' : '' }}> 3　
+                                                    <input type="radio" name="understanding" value="3" {{ optional($studentLesson)->understanding == 3 ? 'checked' : '' }}> 3　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="4" {{ optional($lesson)->understanding == 4 ? 'checked' : '' }}> 4　
+                                                    <input type="radio" name="understanding" value="4" {{ optional($studentLesson)->understanding == 4 ? 'checked' : '' }}> 4　
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="understanding" value="5" {{ optional($lesson)->understanding == 5 ? 'checked' : '' }}> 5　
+                                                    <input type="radio" name="understanding" value="5" {{ optional($studentLesson)->understanding == 5 ? 'checked' : '' }}> 5　
                                                 </label>
                                                 <br><br><br>
                                                 <h5>感想</h5>
                                                 <p>できるようになったこと・難しかったことを書こう</p>
                                                 
-                                                <input type="text" size='50' name="comment" value="{{ optional($lesson)->comment }}">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </form>
+                                                <input type="text" size='50' name="comment" value="{{ optional($studentLesson)->comment }}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +211,7 @@
     </div>
 
 
-
+{{----------- 日記 ------------}}
   <div class="bottom_content">
     <div class="bottom_content_left">
         <div class="bottom_content_left_top">
@@ -276,57 +333,8 @@
         </div>
     </div>
 <div class="bottom_content_right">
-    <!-- 授業追加ボタン -->
-    <button type="button" class="btn_plus" id="btn_class" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        ＋
-    </button>
   
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">授業</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('lessons.store') }}" method="post">
-            @csrf
-            <select name="period">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
-            <select name="subject_id">
-                <option value="1">国語</option>
-                <option value="2">算数</option>
-                <option value="3">英語</option>
-                <option value="4">社会</option>
-                <option value="5">理科</option>
-                <option value="6">道徳</option>
-                <option value="7">体育</option>
-                <option value="8">図工</option>
-                <option value="9">音楽</option>
-                <option value="10">家庭科</option>
-                <option value="11">生活</option>
-                <option value="12">総合</option>
-                <option value="13">学活</option>
-            </select>
-            <input type="text" size="30" name="content">
-            
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-            </form>
-      </div>
-    </div>
-  </div>
+
     <div class="diary_box">
         <div class="diary_box_left diary_text">{{ optional($diary)->content }}</div>
         <div class="diary_box_right">

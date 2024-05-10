@@ -19,7 +19,12 @@ class Lesson extends Model
         return $this->hasMany('App\Models\User');
     }
 
-    
+    function studentLessons()
+    {
+        return $this->hasMany('App\Models\StudentLesson');
+    }
+
+
 
     public $timestamps = false;
 

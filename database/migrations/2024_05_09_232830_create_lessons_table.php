@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('diaries', function (Blueprint $table) {
-        
-            // $table->foreignId('user_id')->constrained('users');
-
+        Schema::create('lessons', function (Blueprint $table) {
+            $table->id();
+            $table->date('date');
+            $table->integer('period');
+            $table->integer('subject_id');
+            $table->text('content')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -23,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('diaries', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('lessons');
     }
 };

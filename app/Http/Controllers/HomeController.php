@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Lesson;
 use App\Models\Diary;
+use App\Models\StudentLesson;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,18 +38,21 @@ class HomeController extends Controller
             ->whereDate('date', $date)
             ->orderBy('period', 'asc') // 'period'を基準に昇順でソート
             ->get();
+        $studentLessons = StudentLesson::where('user_id', $userId)
+                            ->get();
         $diary = Diary::where('date', $date)
                         ->where('user_id', $userId)
                         ->first(); 
 
-        return view('home', compact('task', 'date', 'today', 'lessons', 'diary', 'user'));
+        return view('home', compact('task', 'date', 'today', 'lessons', 'studentLessons', 'diary', 'user'));
     }
 
 
     function check()
     {
         $user = Auth::user();
-        $diaries = Diary::all();
+        $userId = Auth::id();
+        $diaries = Diary::where('user_id', $userId)->get();
 
         return view('calendar', compact('diaries', 'user'));
     }

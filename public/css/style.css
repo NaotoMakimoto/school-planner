@@ -36,7 +36,7 @@ html {
 /* ---- トップコンテンツ -----*/
 .top_content {
     width: 95vw;
-    height: 20vh;
+    height: 19vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -45,7 +45,7 @@ html {
 
 .top_content_left {
     width: 25vw;
-    height: 20vh;
+    height: 19vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -70,7 +70,7 @@ html {
 .top_content_right {
     display: flex;
     width: 70vw;
-    height: 20vh;
+    height: 19vh;
 }
 
 .taskbox {
@@ -97,14 +97,21 @@ html {
 /* ----- 授業 -------*/
 .middle_content {
     width: 95vw;
-    height: 40vh;
+    height: 41vh;
     margin: 0 auto;
+}
+
+#btn_class {
+    margin-left: 20vw;
+    margin-bottom: 0.1rem;
 }
 
 .middle_content p {
     font-size: 0.8rem;
     text-align: center;
     margin-bottom: 0;
+    margin-left: 5rem;
+    display: inline;
 }
 
 .class_table {
@@ -167,11 +174,12 @@ html {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-top: 0.5rem;
 }
 
 .bottom_content_left_top h1 {
     font-size: 1.8rem;
-    margin: 0.5rem 1rem;
+    margin: 0.5rem;
 }
 
 .mood_img_box {
@@ -193,10 +201,7 @@ html {
 
 .bottom_content_right {
     width: 77vw;
-}
-
-#btn_class {
-    margin-left: 15vw;
+    padding-top: 2rem;
 }
 
 .diary_box {

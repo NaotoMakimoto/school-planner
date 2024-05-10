@@ -21,11 +21,9 @@ class DiaryController extends Controller
         $diary = Diary::updateOrCreate(
             [
                 'user_id' => $userId,
-                'date' => $selected_date
-                
+                'date' => $selected_date               
             ],
             [
-               
                 'mood' => $request->mood,
                 'content' => $request->content,
                 // 'questions' 配列から個々の値を取得し、存在しない場合は 0 を設定
