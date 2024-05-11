@@ -29,9 +29,11 @@
                 @endif
             </div>
             <!-- タスク追加ボタン -->
+            @if($user->role === 'Teacher')
             <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#Modal_task">
                 ＋
             </button>
+            @endif
         </div>
         
         <!-- Modal -->
@@ -67,9 +69,11 @@
     {{----- 授業 -------}}
     <div class="middle_content">
           <!-- 授業追加ボタン -->
+    @if($user->role === 'Teacher')
     <button type="button" class="btn_plus" id="btn_class" data-bs-toggle="modal" data-bs-target="#exampleModal">
         ＋
     </button>
+    @endif
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -156,9 +160,11 @@
                         <td class="td_comment">{{ $studentLesson->comment ?? '' }}</td>
                         <td class="td_btn">
                             <!-- 生徒の感想ボタン -->
+                            @if($user->role === 'Student')
                             <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $i }}">
                                 ＋
                             </button>
+                            @endif
                             
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal{{ $i }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $i }}" aria-hidden="true">
@@ -218,9 +224,12 @@
             <h1>日記</h1>
         
             <!-- 今日の気分と日記を投稿するボタン -->
+            @if($user->role === 'Student')
             <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal_diary">
                 ＋
             </button>
+            @endif
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModal_diary" tabindex="-1" aria-labelledby="exampleModalLabel_diary" aria-hidden="true">
                 <div class="modal-dialog">
@@ -341,9 +350,12 @@
             <p>{{ optional($diary)->comment }}</p>
     
                <!-- 先生のコメントボタン -->
+            @if($user->role === 'Teacher')
             <button type="button" class="btn_plus" id="btn_teacher_comment" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
                 ＋
             </button>
+            @endif
+
             <!-- Modal -->
             <div class="modal fade" id="Modal_diary_comment" tabindex="-1" aria-labelledby="ModalLabel_diary_comment" aria-hidden="true">
                 <div class="modal-dialog">
