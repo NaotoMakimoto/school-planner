@@ -29,6 +29,13 @@
               <li><a href="#">menu2</a></li>
               <li><a href="#">menu3</a></li>
               <li><a href="#">menu4</a></li>
+              <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Logout
+              </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            </li>
             </ul>
         </nav>
 

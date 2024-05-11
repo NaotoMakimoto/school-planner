@@ -6,6 +6,8 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\StudentLessonController;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
