@@ -38,8 +38,17 @@
             </li>
             </ul>
         </nav>
-
-        <p>{{ $user->grade }}年{{ $user->class }}組{{ $user->attendance_number }}番 {{ $user->name }}</p>
+      
+        <p>
+            {{ $user->grade }}年{{ $user->class }}組{{ $user->attendance_number }}番 {{ $user->name }}　  
+            @if(session('teacherId'))
+                @php
+                    $teacher = App\Models\User::find(session('teacherId'));
+                @endphp
+                （<a href="{{ route('studentPage.back') }}">  {{ $teacher->name }}</a>としてログインしています）
+            @endif
+        </p>
+        
     </header>
 
     @yield('content')
@@ -47,6 +56,6 @@
     <footer>
 
     </footer>
-    <script src="js/script.js"></script>
+    <script src="js\script.js"></script>
 </body>
 </html>

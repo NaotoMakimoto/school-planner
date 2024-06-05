@@ -160,7 +160,7 @@
                         <td class="td_comment">{{ $studentLesson->comment ?? '' }}</td>
                         <td class="td_btn">
                             <!-- 生徒の感想ボタン -->
-                            @if($user->role === 'Student')
+                            @if($user->role === 'Student' && !session()->has('teacherId'))
                             <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $i }}">
                                 ＋
                             </button>
@@ -218,13 +218,14 @@
 
 
 {{----------- 日記 ------------}}
+@if($user->role === 'Student')
   <div class="bottom_content">
     <div class="bottom_content_left">
         <div class="bottom_content_left_top">
             <h1>日記</h1>
         
             <!-- 今日の気分と日記を投稿するボタン -->
-            @if($user->role === 'Student')
+            @if($user->role === 'Student' && !session()->has('teacherId'))
             <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal_diary">
                 ＋
             </button>
@@ -350,10 +351,10 @@
             <p>{{ optional($diary)->comment }}</p>
     
                <!-- 先生のコメントボタン -->
-            @if($user->role === 'Teacher')
-            <button type="button" class="btn_plus" id="btn_teacher_comment" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
-                ＋
-            </button>
+            @if(session('teacherId'))
+                <button type="button" class="btn_plus" id="btn_teacher_comment" data-bs-toggle="modal" data-bs-target="#Modal_diary_comment">
+                    ＋
+                </button>
             @endif
 
             <!-- Modal -->
@@ -383,12 +384,51 @@
     </div>
             
 </div>
+@endif
         
-       
-     
-
-      
-   
+@if($user->role === 'Teacher')    
+     <div class="bottom_content">
+        <p>生徒一覧</p>
+        <div>
+            @for ($i = 1; $i <= 40; $i++)
+                @php
+                $student = $students->firstWhere('attendance_number', $i);
+                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                @endphp
+                <a href="{{ route('studentPage.show', $student->id ?? '') }}">
+                    {{-- {{ $student->attendance_number ?? '' }} --}}
+                    <div class="student_name">{{ $student->name ?? '' }}</div>
+                </a>
+                    {{ $todaysDiary->mood ?? '' }}
+                    
+                    {{-- <span class="mood_img_box_all">
+                        @switch(optional($todaysDiary)->mood)
+                            @case(1)
+                                <img src="image/face_img1.png" alt="">
+                                @break
+                            @case(2)
+                                <img src="image/face_img2.png" alt="">
+                                @break
+                            @case(3)
+                                <img src="image/face_img3.png" alt="">
+                                @break
+                            @case(4)
+                                <img src="image/face_img4.png" alt="">
+                                @break
+                            @case(5)
+                                <img src="image/face_img5.png" alt="">
+                                @break           
+                            @endswitch
+                    </span>
+                    --}}
+                
+                
+                 
+            @endfor
+        </div>
+        
+     </div>
+@endif   
 
     </div>
 

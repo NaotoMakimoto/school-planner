@@ -29,6 +29,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $userId = Auth::id();
+        $grade = $user->grade;
+        $class = $user->class;
+        $students = User::where('grade', $grade)
+                        ->where('class', $class)
+                        ->orderBy('attendance_number', 'asc')
+                        ->get();
+                        
         $today = Carbon::today(); 
         // クエリパラメータの 'date' を確認し、存在すればそれを使用
         $date = $request->query('date', $request->session()->get('selected_date', $today->toDateString()));
@@ -44,7 +51,7 @@ class HomeController extends Controller
                         ->where('user_id', $userId)
                         ->first(); 
 
-        return view('home', compact('task', 'date', 'today', 'lessons', 'studentLessons', 'diary', 'user'));
+        return view('home', compact('task', 'date', 'today', 'lessons', 'studentLessons', 'diary', 'user','students'));
     }
 
 

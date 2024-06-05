@@ -242,3 +242,17 @@ html {
     right: 0.3rem;
     bottom: 0.3rem;
 }
+
+
+/* ------------------ 生徒一覧 ----------------- */
+
+.mood_img_box_all {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #000;
+}
+
+.mood_img_box_all img {
+    width: 100%;
+    
+}

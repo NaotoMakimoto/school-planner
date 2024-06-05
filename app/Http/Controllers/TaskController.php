@@ -27,7 +27,6 @@ class TaskController extends Controller
 
     function update(Request $request, $id)
     {
-
         $task = Task::find($id);
         $task -> assignments = $request -> assignments;
         $task -> belongings = $request -> belongings;

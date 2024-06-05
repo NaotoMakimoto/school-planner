@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\DiaryController;
+use App\Http\Controllers\StudentPageController;
 use App\Http\Controllers\StudentLessonController;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,3 +43,6 @@ Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
 Route::get('/calendar', [HomeController::class, 'check'])->name('calendar.check');
 
+Route::get('/student-page/{id}',[StudentPageController::class, 'show'])->name('studentPage.show');
+
+Route::get('/student-page',[StudentPageController::class, 'back'])->name('studentPage.back');
