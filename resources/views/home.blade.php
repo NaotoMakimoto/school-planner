@@ -137,26 +137,7 @@
                         @endphp
                         <td class="td_subject">{{ $lesson->subject->name ?? '' }}</td>
                         <td class="td_content">{{ $lesson->content ?? '' }}</td>
-                        <td class="td_understanding">{{ $studentLesson->understanding ?? '' }}
-                            
-                            {{-- @switch($lesson->understanding ?? '')
-                            @case(1)
-                                <img src="image/face_img1.png" alt="">
-                                @break
-                            @case(2)
-                                <img src="image/face_img2.png" alt="">
-                                @break
-                            @case(3)
-                                <img src="image/face_img3.png" alt="">
-                                @break
-                            @case(4)
-                                <img src="image/face_img4.png" alt="">
-                                @break
-                            @case(5)
-                                <img src="image/face_img5.png" alt="">
-                                @break           
-                            @endswitch --}}
-                        </td>
+                        <td class="td_understanding">{{ $studentLesson->understanding ?? '' }}</td>
                         <td class="td_comment">{{ $studentLesson->comment ?? '' }}</td>
                         <td class="td_btn">
                             <!-- 生徒の感想ボタン -->
