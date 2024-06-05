@@ -387,45 +387,299 @@
 @endif
         
 @if($user->role === 'Teacher')    
-     <div class="bottom_content">
+     <div class="bottom_content_index">
         <p>生徒一覧</p>
-        <div>
-            @for ($i = 1; $i <= 40; $i++)
-                @php
-                $student = $students->firstWhere('attendance_number', $i);
-                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
-                @endphp
-                <a href="{{ route('studentPage.show', $student->id ?? '') }}">
-                    {{-- {{ $student->attendance_number ?? '' }} --}}
-                    <div class="student_name">{{ $student->name ?? '' }}</div>
-                </a>
-                    {{ $todaysDiary->mood ?? '' }}
-                    
-                    {{-- <span class="mood_img_box_all">
-                        @switch(optional($todaysDiary)->mood)
-                            @case(1)
-                                <img src="image/face_img1.png" alt="">
-                                @break
-                            @case(2)
-                                <img src="image/face_img2.png" alt="">
-                                @break
-                            @case(3)
-                                <img src="image/face_img3.png" alt="">
-                                @break
-                            @case(4)
-                                <img src="image/face_img4.png" alt="">
-                                @break
-                            @case(5)
-                                <img src="image/face_img5.png" alt="">
-                                @break           
-                            @endswitch
-                    </span>
-                    --}}
-                
-                
-                 
-            @endfor
+        <div class="index_table_box">
+            <table class="index_table">
+                @for ($i = 1; $i <= 5; $i++)            
+                    @php
+                    $student = $students->firstWhere('attendance_number', $i);
+                    $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                    @endphp
+                    <tr>
+                        <td class="index_check">
+                            @if($todaysDiary && $todaysDiary->comment != '')
+                                <img src="image/red-check.jpeg" alt="">
+                            @endif                        
+                        </td>
+                        <td class="index_name"> 
+                            <a href="{{ route('studentPage.show', $student->id ?? '') }}">
+                            {{-- {{ $student->attendance_number ?? '' }} --}}
+                               {{ $student->name ?? '' }}
+                            </a>
+                            @switch(optional($todaysDiary)->mood)
+                                @case(1)
+                                    <div class="mood_img_box_all">
+                                        <img src="image/face_img1.png" alt="">
+                                        @break
+                                    </div>
+                                @case(2)
+                                    <div class="mood_img_box_all">
+                                        <img src="image/face_img2.png" alt="">
+                                        @break
+                                    </div>
+                                @case(3)
+                                    <div class="mood_img_box_all">
+                                        <img src="image/face_img3.png" alt="">
+                                        @break
+                                    </div>
+                                @case(4)
+                                    <div class="mood_img_box_all">
+                                        <img src="image/face_img4.png" alt="">
+                                        @break
+                                    </div>
+                                @case(5)
+                                    <div class="mood_img_box_all">
+                                        <img src="image/face_img5.png" alt="">
+                                        @break
+                                    </div>          
+                                @endswitch
+                        </td>
+                    </tr>    
+                @endfor
+                </table>
+                <table class="index_table">
+                    @for ($i = 6; $i <= 10; $i++)            
+                        @php
+                        $student = $students->firstWhere('attendance_number', $i);
+                        $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                        @endphp
+                        <tr>
+                            <td class="index_check">
+                                @if($todaysDiary && $todaysDiary->comment != '')
+                                    <img src="image/red-check.jpeg" alt="">
+                                @endif                    
+                            </td>
+                            <td class="index_name"> 
+                                <a href="{{ route('studentPage.show', $student->id ?? '') }}">
+                                {{-- {{ $student->attendance_number ?? '' }} --}}
+                                   {{ $student->name ?? '' }}
+                                </a>
+                                @switch(optional($todaysDiary)->mood)
+                                    @case(1)
+                                        <div class="mood_img_box_all">
+                                            <img src="image/face_img1.png" alt="">
+                                            @break
+                                        </div>
+                                    @case(2)
+                                        <div class="mood_img_box_all">
+                                            <img src="image/face_img2.png" alt="">
+                                            @break
+                                        </div>
+                                    @case(3)
+                                        <div class="mood_img_box_all">
+                                            <img src="image/face_img3.png" alt="">
+                                            @break
+                                        </div>
+                                    @case(4)
+                                        <div class="mood_img_box_all">
+                                            <img src="image/face_img4.png" alt="">
+                                            @break
+                                        </div>
+                                    @case(5)
+                                        <div class="mood_img_box_all">
+                                            <img src="image/face_img5.png" alt="">
+                                            @break
+                                        </div>          
+                                    @endswitch
+                            </td>
+                        </tr>    
+                    @endfor
+                    </table>
+                    <table class="index_table">
+                        @for ($i = 11; $i <= 15; $i++)            
+                            @php
+                            $student = $students->firstWhere('attendance_number', $i);
+                            $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                            @endphp
+                            <tr>
+                                <td class="index_check">
+                                    @if($todaysDiary && $todaysDiary->comment != '')
+                                        <img src="image/red-check.jpeg" alt="">
+                                    @endif
+                                </td>
+                                <td class="index_name"> 
+                                    <a href="{{ route('studentPage.show', $student->id ?? '') }}">
+                                    {{-- {{ $student->attendance_number ?? '' }} --}}
+                                       {{ $student->name ?? '' }}
+                                    </a>
+                                    @switch(optional($todaysDiary)->mood)
+                                        @case(1)
+                                            <div class="mood_img_box_all">
+                                                <img src="image/face_img1.png" alt="">
+                                                @break
+                                            </div>
+                                        @case(2)
+                                            <div class="mood_img_box_all">
+                                                <img src="image/face_img2.png" alt="">
+                                                @break
+                                            </div>
+                                        @case(3)
+                                            <div class="mood_img_box_all">
+                                                <img src="image/face_img3.png" alt="">
+                                                @break
+                                            </div>
+                                        @case(4)
+                                            <div class="mood_img_box_all">
+                                                <img src="image/face_img4.png" alt="">
+                                                @break
+                                            </div>
+                                        @case(5)
+                                            <div class="mood_img_box_all">
+                                                <img src="image/face_img5.png" alt="">
+                                                @break
+                                            </div>          
+                                        @endswitch
+                                </td>
+                            </tr>    
+                        @endfor
+                        </table>
+                        <table class="index_table">
+                            @for ($i = 16; $i <= 20; $i++)            
+                                @php
+                                $student = $students->firstWhere('attendance_number', $i);
+                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                                @endphp
+                                <tr>
+                                    <td class="index_check">
+                                        @if($todaysDiary && $todaysDiary->comment != '')
+                                            <img src="image/red-check.jpeg" alt="">
+                                        @endif          
+                                    </td>
+                                    <td class="index_name"> 
+                                        <a href="{{ route('studentPage.show', $student->id ?? '') }}">
+                                        {{-- {{ $student->attendance_number ?? '' }} --}}
+                                           {{ $student->name ?? '' }}
+                                        </a>
+                                        @switch(optional($todaysDiary)->mood)
+                                            @case(1)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img1.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(2)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img2.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(3)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img3.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(4)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img4.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(5)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img5.png" alt="">
+                                                    @break
+                                                </div>          
+                                            @endswitch
+                                    </td>
+                                </tr>    
+                            @endfor
+                            </table>
+                        <table class="index_table">
+                            @for ($i = 21; $i <= 25; $i++)            
+                                @php
+                                $student = $students->firstWhere('attendance_number', $i);
+                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                                @endphp
+                                <tr>
+                                    <td class="index_check">
+                                        @if($todaysDiary && $todaysDiary->comment != '')
+                                            <img src="image/red-check.jpeg" alt="">
+                                        @endif    
+                                    </td>
+                                    <td class="index_name"> 
+                                        <a href="{{ route('studentPage.show', $student->id ?? '') }}">
+                                        {{-- {{ $student->attendance_number ?? '' }} --}}
+                                           {{ $student->name ?? '' }}
+                                        </a>
+                                        @switch(optional($todaysDiary)->mood)
+                                            @case(1)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img1.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(2)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img2.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(3)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img3.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(4)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img4.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(5)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img5.png" alt="">
+                                                    @break
+                                                </div>          
+                                            @endswitch
+                                    </td>
+                                </tr>    
+                            @endfor
+                            </table>
+                        <table class="index_table">
+                            @for ($i = 26; $i <= 30; $i++)            
+                                @php
+                                $student = $students->firstWhere('attendance_number', $i);
+                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                                @endphp
+                                <tr>
+                                    <td class="index_check">
+                                        @if($todaysDiary && $todaysDiary->comment != '')
+                                            <img src="image/red-check.jpeg" alt="">
+                                        @endif         
+                                    </td>
+                                    <td class="index_name"> 
+                                        <a href="{{ route('studentPage.show', $student->id ?? '') }}">
+                                        {{-- {{ $student->attendance_number ?? '' }} --}}
+                                           {{ $student->name ?? '' }}
+                                        </a>
+                                        @switch(optional($todaysDiary)->mood)
+                                            @case(1)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img1.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(2)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img2.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(3)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img3.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(4)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img4.png" alt="">
+                                                    @break
+                                                </div>
+                                            @case(5)
+                                                <div class="mood_img_box_all">
+                                                    <img src="image/face_img5.png" alt="">
+                                                    @break
+                                                </div>          
+                                            @endswitch
+                                    </td>
+                                </tr>    
+                            @endfor
+                            </table>
         </div>
+        
         
      </div>
 @endif   

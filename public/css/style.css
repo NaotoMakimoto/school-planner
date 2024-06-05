@@ -246,13 +246,65 @@ html {
 
 /* ------------------ 生徒一覧 ----------------- */
 
+.bottom_content_index {  
+    width: 95vw;
+    height: 35vh;
+    margin: 0 auto;
+}
+
+.bottom_content_index p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0 0 0;
+}
+
+.index_table_box {
+    display: flex;
+    width: 95vw;
+    height: 18rem;
+    margin: 0 auto;
+}
+
+.index_table {
+    height: 15rem;
+    width: 15vw;
+    /* border-collapse: collapse; */
+    font-size: 1.4rem;
+}
+
+.index_table tr {
+    height: 3rem;
+    width: 100%;
+}
+
+.index_table td {
+    /* border: 1px black solid; */
+    padding: 0;
+}
+
+.index_check {
+    width: 3rem;
+    height: 3rem;
+    text-align: right;
+}
+
+.index_check img {
+    width: 50%;
+    height: 50%;
+
+}
+
+.index_name {
+    height: 3rem;
+    width: 11vw;
+    display: flex;
+    align-items: center;
+}
+
 .mood_img_box_all {
-    width: 1.5rem;
-    height: 1.5rem;
-    background-color: #000;
+    width: 3rem;
+    height: 3rem;
 }
 
 .mood_img_box_all img {
-    width: 100%;
-    
+    width: 100%;   
 }
