@@ -375,7 +375,7 @@
                 @for ($i = 1; $i <= 5; $i++)            
                     @php
                     $student = $students->firstWhere('attendance_number', $i);
-                    $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                    $todaysDiary = $student ? $student->diaries()->whereDate('date', $date)->first() : null;
                     @endphp
                     <tr>
                         <td class="index_check">
@@ -423,7 +423,7 @@
                     @for ($i = 6; $i <= 10; $i++)            
                         @php
                         $student = $students->firstWhere('attendance_number', $i);
-                        $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                        $todaysDiary = $student ? $student->diaries()->whereDate('date', $date)->first() : null;
                         @endphp
                         <tr>
                             <td class="index_check">
@@ -471,7 +471,7 @@
                         @for ($i = 11; $i <= 15; $i++)            
                             @php
                             $student = $students->firstWhere('attendance_number', $i);
-                            $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                            $todaysDiary = $student ? $student->diaries()->whereDate('date', $date)->first() : null;
                             @endphp
                             <tr>
                                 <td class="index_check">
@@ -519,7 +519,7 @@
                             @for ($i = 16; $i <= 20; $i++)            
                                 @php
                                 $student = $students->firstWhere('attendance_number', $i);
-                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $date)->first() : null;
                                 @endphp
                                 <tr>
                                     <td class="index_check">
@@ -567,7 +567,7 @@
                             @for ($i = 21; $i <= 25; $i++)            
                                 @php
                                 $student = $students->firstWhere('attendance_number', $i);
-                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $date)->first() : null;
                                 @endphp
                                 <tr>
                                     <td class="index_check">
@@ -615,7 +615,7 @@
                             @for ($i = 26; $i <= 30; $i++)            
                                 @php
                                 $student = $students->firstWhere('attendance_number', $i);
-                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $today)->first() : null;
+                                $todaysDiary = $student ? $student->diaries()->whereDate('date', $date)->first() : null;
                                 @endphp
                                 <tr>
                                     <td class="index_check">
