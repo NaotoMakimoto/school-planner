@@ -129,6 +129,9 @@
                         <td class="td_period">{{ $i }}</td>
                         @php
                             $lesson = $lessons->firstWhere('period', $i);
+
+                            \Log::info('Lesson Understandings: ', $lessonUnderstandings);
+
                             if($lesson){
                                 $studentLesson = $studentLessons->firstWhere('lesson_id', $lesson->id);
                             } else {
@@ -190,6 +193,97 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                              <!-- 授業分析ボタン -->
+                              @if($user->role === 'Teacher' && $lesson != '')
+                                <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#analyticsModal{{ $i }}">
+                                    ＋
+                                </button>
+                              @endif
+                              
+                              <!-- Modal -->
+                              @if($lesson)
+                              <div class="modal fade" id="analyticsModal{{ $i }}" tabindex="-1" aria-labelledby="analyticsModalLabel{{ $i }}" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="analyticsModalLabel{{ $i }}">{{ $i }}時間目　{{ optional(optional($lesson)->subject)->name }}　{{ optional($lesson)->content }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body analize-box">
+                                                <canvas id="PieChart{{ $i }}"></canvas>
+                                                <script>
+                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                        var ctx = document.getElementById('PieChart{{ $i }}').getContext('2d');
+                                                        var lessonUnderstandings = @json($lessonUnderstandings[$lesson->id] ?? []);
+
+                                                        console.log('lessonUnderstandings:', lessonUnderstandings);
+
+                                                        var labels = ['1', '2', '3', '4', '5'];
+                                                        var amounts = [
+                                                            lessonUnderstandings['1'] || 0, 
+                                                            lessonUnderstandings['2'] || 0,
+                                                            lessonUnderstandings['3'] || 0,
+                                                            lessonUnderstandings['4'] || 0,
+                                                            lessonUnderstandings['5'] || 0
+                                                            ];
+
+                                                        var chart = new Chart(ctx, {
+                                                            type: 'pie',
+                                                            data: {
+                                                                labels: labels,
+                                                                datasets: [{
+                                                                    data: amounts,
+                                                                    backgroundColor: [
+                                                                        'red',
+                                                                        'blue',
+                                                                        'green',
+                                                                        'yellow',
+                                                                        'orange',                                                                    
+                                                                    ],
+                                                                    borderColor: [
+                                                                        'red',
+                                                                        'blue',
+                                                                        'green',
+                                                                        'yellow',
+                                                                        'orange',  
+                                                                    ],
+                                                                    borderWidth: 1
+                                                                }]                                    
+                                                            },
+                                                            options: {
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        position: 'top',
+                                                                    },
+                                                                    title: {
+                                                                        display: true,
+                                                                        text: 'Understanding'
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                                {{-- <div>
+                                                    @if(isset($lessonComments[$lesson->id]))
+                                                        @foreach($lessonComments[$lesson->id] as $comment)
+                                                            <p>{{ $comment }}</p>
+                                                        @endforeach
+                                                    @endif
+                                                </div> --}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                
+                                      </div>
+                                  </div>
+                              </div>
+                              @endif
                         </td>
                     </tr>
                 @endfor

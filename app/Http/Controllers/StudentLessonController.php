@@ -29,4 +29,11 @@ class StudentLessonController extends Controller
 
         return redirect()->route('home');
     }
+
+    function show($id)
+    {
+        $studentLessons = StudentLesson::where('lesson_id', $id);
+        $understandings = $studentLessons -> understanding;
+    }
+    
 }

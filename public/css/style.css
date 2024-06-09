@@ -154,6 +154,18 @@ html {
 }
 
 
+/* ------- 授業分析モーダル ------------- */
+
+.analyze-box {
+    display: flex;
+}
+
+.analyze-box canvas {
+    width: 10rem;
+    height: 10rem;
+}
+
+
 /*-----------日記---------------*/
 .bottom_content {
     display: flex;
