@@ -11,6 +11,18 @@ class StudentLesson extends Model
 
     function lesson()
     {
-        $this->belongsTo('App\Models\Lesson');
+        return $this->belongsTo('App\Models\Lesson');
     }
+
+    function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    protected $fillable = [
+        'user_id',
+        'lesson_id',
+        'understanding',
+        'comment',
+    ];
 }

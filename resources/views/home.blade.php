@@ -211,8 +211,8 @@
                                                 <h5 class="modal-title" id="analyticsModalLabel{{ $i }}">{{ $i }}時間目　{{ optional(optional($lesson)->subject)->name }}　{{ optional($lesson)->content }}</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body analize-box">
-                                                <canvas id="PieChart{{ $i }}"></canvas>
+                                            <div class="modal-body analyze-box">
+                                                <canvas id="PieChart{{ $i }}" width="400" height="400"></canvas>
                                                 <script>
                                                     document.addEventListener('DOMContentLoaded', function() {
                                                         var ctx = document.getElementById('PieChart{{ $i }}').getContext('2d');
@@ -253,7 +253,7 @@
                                                                 }]                                    
                                                             },
                                                             options: {
-                                                                responsive: true,
+                                                                responsive: false,
                                                                 maintainAspectRatio: false,
                                                                 plugins: {
                                                                     legend: {
@@ -268,13 +268,15 @@
                                                         });
                                                     });
                                                 </script>
-                                                {{-- <div>
+                                         
                                                     @if(isset($lessonComments[$lesson->id]))
+                                                    <div class="student-comment-box">
                                                         @foreach($lessonComments[$lesson->id] as $comment)
-                                                            <p>{{ $comment }}</p>
-                                                        @endforeach
+                                                            <p>{{ $comment->user->name }}：{{ $comment->comment }}</p>
+                                                        @endforeach                                              
+                                                    </div>
                                                     @endif
-                                                </div> --}}
+                                               
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

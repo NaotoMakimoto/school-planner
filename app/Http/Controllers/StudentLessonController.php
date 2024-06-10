@@ -19,13 +19,18 @@ class StudentLessonController extends Controller
         }
         $lessonId = $id;
 
-        $studentLessons = new StudentLesson;
+       
 
-        $studentLessons -> user_id = $userId;
-        $studentLessons -> lesson_id = $lessonId;
-        $studentLessons -> understanding = $request -> understanding;
-        $studentLessons -> comment = $request -> comment;
-        $studentLessons -> save();
+        $studentLessons = StudentLesson::updateOrCreate(
+            [
+                'user_id' => $userId,
+                'lesson_id' => $lessonId
+            ],
+            [
+                'understanding' => $request -> understanding,
+                'comment' => $request -> comment
+            ]
+        );
 
         return redirect()->route('home');
     }

@@ -55,8 +55,10 @@ class HomeController extends Controller
         $lessonComments = [];
         foreach ($lessons as $lesson) {
             $comments = StudentLesson::where('lesson_id', $lesson->id)
-                                    ->pluck('comment')
-                                    ->toArray();
+                                    ->with('user')
+                                    ->get(['comment', 'user_id']);
+
+                                    // dd($comments);
             $lessonComments[$lesson->id] = $comments;
         }
 

@@ -158,11 +158,18 @@ html {
 
 .analyze-box {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.analyze-box canvas {
-    width: 10rem;
-    height: 10rem;
+.student-comment-box {
+    padding: 0;
+    margin: 0;
+}
+
+.student-comment-box p {
+    font-size: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 
