@@ -144,7 +144,7 @@
                         <td class="td_comment">{{ $studentLesson->comment ?? '' }}</td>
                         <td class="td_btn">
                             <!-- 生徒の感想ボタン -->
-                            @if($user->role === 'Student' && !session()->has('teacherId'))
+                            @if($lesson && $user->role === 'Student' && !session()->has('teacherId'))
                             <button type="button" class="btn_plus" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $i }}">
                                 ＋
                             </button>
